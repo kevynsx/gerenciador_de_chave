@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root{
+    --corbotao: #004A8D;
+    --corbotaohover: #208fc6;
+    --bordabotao: #000f5a;
+    --bordabotaohover: #3042b1;
+
+    --corinput: white;
+    --bordainput: #7c7c7c;
+
+    --papeldeparede: ;
+
+    --fundo: #efefef;
+    --bordafundo: var(--bordainput);
+    --fundoheader: var(--fundo);
+    --bordaheader: var(--bordainput);
+
+    --corstatus1: #8898e1;
+    --bordastatus1: #00188d;
+    --corstatus2: #9de188;
+    --bordastatus2: #0c8d00;
+    --corstatus3: #e1c288;
+    --bordastatus3: #8d5e00;
+    --corstatus4: #e188b9;
+    --bordastatus4: #8d0023;
+}
+
+*{
+    margin: 0;
+    outline: 0px solid red;
+    font-family: 'IBM Plex Sans';
+}
+
+input, select{
+    padding:2%;
+    border: 1px solid var(--bordainput);
+    border-radius: 10px;
+    background: var(--corinput);
+    font-size: 12pt;
+    font-weight: regular;
+}
+
+.headerporteiro{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1%;
+}
+
+.headerporteiroesq{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    font-size: 12px;
+    margin-left: 3%;
+}
+
+.headerporteirodir{
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    justify-content: end;
+    margin-right: 3%;
+}
+
+.headerporteirodirtexto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 12px;
+    margin-right: 2.5%;
+    text-align: end;
+}
+
+.headerporteirodirimg{
+    display: flex;
+    img{border-radius: 12px;
+    border: 1px solid #202020;}
+}
+
+.secao1{
+    display: flex;
+    flex-direction: row;
+    padding-block: 1%;
+    justify-content: center;
+}
+
+.secao1status{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    justify-content: space-between;
+}
+
+.secao1status1, .secao1status2, .secao1status3, .secao1status4{
+    display: flex;
+    flex-direction: column;
+    padding-block: 3%;
+    padding-inline: 2%;
+    width: 16.75%;
+    font-size: 15px;
+    border-radius: 12px;
+    border: 1px solid;
+}
+
+.secao1status1{
+    background: var(--corstatus1);
+    color: black;
+    border-color: var(--bordastatus1);
+}
+
+.secao1status2{
+    background: var(--corstatus2);
+    color: black;
+    border-color: var(--bordastatus2);
+}
+
+.secao1status3{
+    background: var(--corstatus3);
+    color: black;
+    border-color: var(--bordastatus3);
+}
+
+.secao1status4{
+    background: var(--corstatus4);
+    color: black;
+    border-color: var(--bordastatus4);
+}
+
+.secao2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-block: 1%;
+    width: 95%;
+    margin: 0 auto;
+}
+.secao2esq{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding:1%;
+    border: 1px solid var(--bordafundo);
+    background: var(--fundo);
+    border-radius: 10px;
+    width: 45%;
+}
+
+.secao2esqitens{
+    display: flex;
+    flex-direction: column;
+    height: 44vh;
+    justify-content: space-evenly;
+}
+
+.secao2esqbotao{
+    background: var(--corbotao);
+    width: 100%;
+    padding:1%;
+    text-align: center;
+    color: white;
+    font-weight: regular;
+    border-radius: 10px;
+    border: 1px solid var(--bordabotao);
+    align-self:center;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.secao2esqbotao:hover{
+    background: var(--corbotaohover);
+    border:var(--bordabotaohover);
+    transform: scale(1.02);
+}
+
+.secao2dir{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding:1%;
+    border: 1px solid var(--bordafundo);
+    background: var(--fundo);
+    border-radius: 10px;
+    width: 45%;
+}
+
+.secao2dirobjarea{
+    display:flex;
+    flex-direction: column;
+    height:44vh;
+    justify-content: space-around;
+    overflow-y: auto;
+}
+
+.secao2dirobj{
+    display:flex;
+    flex-direction: column;
+    padding:3%;
+    border: 1px solid var(--bordainput);
+    border-radius: 10px;
+    background: var(--corinput);
+    font-size: 9pt;
+    font-weight: regular;
+    margin-bottom: 1%;
+}
+
+.secao2dirobjheader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.secao2dirobjheaderdevol{
+    background: var(--corbotao);
+    padding:1%;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 1px solid var(--bordabotao);
+    align-self:center;
+    width: 95%;
+    transition: all 0.1s ease-in-out;
+}
+
+.secao2dirobjheaderdevol:hover{
+    background: var(--corbotaohover);
+    border: var(--bordabotaohover);
+    transform: scale(1.05);
+}
+
+.secao2dirobjtexto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

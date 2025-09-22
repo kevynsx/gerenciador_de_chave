@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+*{
+    margin: 0;
+    font-family: 'IBM Plex Sans';
+}
+
+input{
+    padding:1%;
+    border: 2px solid #b4b4b4;
+    border-radius: 10px;
+    background: linear-gradient(180deg,rgba(168, 168, 168, 1) 0%, rgb(233, 233, 233) 23%);
+    font-size: 12pt;
+    font-weight: regular;
+}
+
+select{
+    padding:1%;
+    border: 2px solid #b4b4b4;
+    border-radius: 10px;
+    background: linear-gradient(180deg,rgba(168, 168, 168, 1) 0%, rgb(233, 233, 233) 23%);
+    font-size: 12pt;
+    font-weight: bold;
+    color: #000000b4;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1%;
+}
+
+.headeresq{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    font-size: 12px;
+    margin-left: 3%;
+}
+
+.headerdir{
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    justify-content: end;
+    margin-right: 3%;
+}
+
+.headerdirtexto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 12px;
+    margin-right: 2.5%;
+    text-align: end;
+}
+
+.headerdirimg{
+    display: flex;
+    img{border-radius: 12px;
+    border: 2px solid #202020;}
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2%;
+    background: linear-gradient(180deg,rgba(194, 194, 194, 1) 0%, rgba(245, 245, 245, 1) 27%);
+    border-radius: 10px;
+    border: 2px solid #6e6e6e;
+    width: 45%;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.areacadastro{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 40vh;
+    margin-bottom: 2%;
+}
+
+.formularioheader{
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+
+.formulariotextosenha{
+    font-size: 12px;
+}
+
+.botaocadastrar{
+    background: linear-gradient(180deg, #050689, #1954d7,#2d65e2,#5184f6);
+    width: 100%;
+    padding:2%;
+    text-align: center;
+    color: white;
+    font-weight: regular;
+    border-radius: 10px;
+    border: 2px solid #050689;
+    align-self:center;
+    transition: all 0.1s ease-in-out;
+}
+
+.botaocadastrar:hover{
+    background: linear-gradient(180deg, #3333c7, #3e76f0,#6190f5,#94b6ff);
+    border: 2px solid #2323c5;
+    transform: scale(1.02);
+}

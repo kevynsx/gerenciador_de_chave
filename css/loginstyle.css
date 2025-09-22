@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root{
+    --corbotao: #004A8D;
+    --corbotaohover: #208fc6;
+    --bordabotao: #000f5a;
+    --bordabotaohover: #3042b1;
+
+    --corinput: #ffffff;
+    --bordainput: #7c7c7c;
+
+    --papeldeparede: ;
+
+    --fundo: #efefef;
+    --bordafundo: var(--bordainput);
+    --fundoheader: var(--fundo);
+    --bordaheader: var(--bordainput);
+}
+*{
+    outline: 0px solid red;
+    margin: 0%;
+    text-decoration: none;
+    font-family: 'IBM Plex Sans';
+}
+body{
+    background: #ffffff;
+}
+
+input{
+    padding:2%;
+    border: 1px solid var(--bordainput);
+    border-radius: 10px;
+    background: var(--corinput);
+    font-size: 15pt;
+    font-weight: 500;
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginsecao{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1%;
+    background: var(--fundo);
+    border-radius: 10px;
+    border: 1px solid var(--bordafundo);
+    width: 45%;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.loginheader{
+    display: flex;
+    flex-direction: column;
+    padding:0.5%;
+    text-align: center;
+    justify-content: space-around;
+    width: 70%;
+    border: 1px solid var(--bordaheader);
+    background: var(--fundoheader);
+    border-radius: 10px;
+}
+
+.logintitulo{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    width:80%;
+    font-weight: 500;
+    font-size: 11pt;
+    justify-content: space-between;
+    padding:1.5%;
+    
+}
+
+.logintitulotexto{
+    align-self: center;
+}
+
+.loginarea{
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    height: 225px;
+    justify-content: space-between;
+    margin-top: 1.5%;
+}
+
+.loginareatexto{
+    text-align: center;
+    font-weight: regular;
+    font-size: 20pt;
+}
+
+.logindigitar{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding: 2%;
+    height: 175px;
+    justify-content: space-around;
+    width: 175%;
+}
+
+.loginbotao{
+    background: var(--corbotao);
+    width: 25%;
+    padding:2%;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    border-radius: 10px;
+    border: 1px solid var(--bordabotao);
+    align-self:flex-end;
+    transition: all 0.1s ease-in-out;
+}
+
+.loginbotao:hover{
+    background: var(--corbotaohover);
+    border: 1px solid var(--bordabotaohover);
+    transform: scale(1.05);
+}
+
+.esqueceuasenhasecao{
+    display: flex;
+    flex-direction:row;
+}
+.esqueceuasenha{
+    font-size:10pt;
+    color: #060e57;
+    text-decoration: underline;
+}
+
+.esqueceuasenha:hover{
+    color: #205da1;
+}
