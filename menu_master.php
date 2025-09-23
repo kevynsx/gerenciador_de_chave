@@ -3,16 +3,16 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+date_default_timezone_set('America/Recife');
+
 require_once('config.php');
 session_start();
-
+$nome = $_SESSION['nome'];
 // Verifica se o usuÃ¡rio estÃ¡ logado, se nÃ£o, redireciona para a pÃ¡gina de login.
 if (!isset($_SESSION['nome'])) {
     header("Location: login.php");
     exit;
 }
-    
-$nome = $_SESSION['nome'];
     
 // Consultas para os contadores
 $sqlTotal = "SELECT COUNT(*) as total FROM chaves";
@@ -24,13 +24,22 @@ $disponiveis = $dbh->query($sqlDisponiveis)->fetch(PDO::FETCH_ASSOC)['disponivei
 $sqlEmprestadas = "SELECT COUNT(*) as emprestadas FROM chaves WHERE situacao = 'Emprestada'";
 $emprestadas = $dbh->query($sqlEmprestadas)->fetch(PDO::FETCH_ASSOC)['emprestadas'];
 
-$sqlAtivos = "SELECT COUNT(*) as ativos 
-            FROM movimentacoes m1
-            LEFT JOIN movimentacoes m2 
-                ON m1.id_chave = m2.id_chave 
-                AND m2.tipo = 'devolucao' 
-                AND m2.data_hora > m1.data_hora
-            WHERE m1.tipo = 'retirada' AND m2.id_mov IS NULL";
+$sqlAtivos = "SELECT COUNT(*) as ativos,
+                m.id_chave,
+                m.id_usuario,
+                u.id_usuarios,
+                c.situacao,
+                m.tipo
+                FROM
+                    chaves c
+                JOIN
+                    movimentacoes m ON c.id_chave = m.id_chave
+                JOIN
+                    usuarios u ON m.id_usuario = u.id_usuarios
+                WHERE
+                    c.situacao = 'Emprestada' AND m.tipo = 'retirada'
+                AND
+                    m.data_hora = (SELECT MAX(data_hora) FROM movimentacoes WHERE id_chave = c.id_chave)";
 $ativos = $dbh->query($sqlAtivos)->fetch(PDO::FETCH_ASSOC)['ativos'];
 
 // Consulta para listar as chaves para a seÃ§Ã£o "Gerenciar Chaves"

@@ -3,6 +3,8 @@
 
 require_once('../config.php');
 
+date_default_timezone_set('America/Recife');
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_chave'])) {
     $id_chave = $_POST['id_chave'];
     $solicitante = $_POST['solicitante'];

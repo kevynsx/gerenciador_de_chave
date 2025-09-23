@@ -1,7 +1,8 @@
 <?php
 // src/devolver_chave.php
-
+date_default_timezone_set('America/Recife');
 require_once('../config.php');
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_chave'])) {
     $id_chave = $_POST['id_chave'];

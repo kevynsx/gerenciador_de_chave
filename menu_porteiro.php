@@ -11,11 +11,14 @@
     
     <?php
         require_once('config.php'); 
-
+        //date_default_timezone_set('America/Recife');
     
-    
+    ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
         // Adicione esta linha para definir a variável $nome
-        $nome = "Nome do Porteiro"; 
+        session_start();
+        $nome = $_SESSION['nome'];
 
         // O restante do seu código vem aqui
 
@@ -30,9 +33,22 @@
         $sqlEmprestadas = "SELECT COUNT(*) as emprestadas FROM chaves WHERE situacao = 'Emprestada'";
         $emprestadas = $dbh->query($sqlEmprestadas)->fetch(PDO::FETCH_ASSOC)['emprestadas'];
 
-        $sqlAtivos = "SELECT COUNT(*) as ativos FROM movimentacoes m1
-                    LEFT JOIN movimentacoes m2 ON m1.id_chave = m2.id_chave AND m2.tipo = 'devolucao' AND m2.data_hora > m1.data_hora
-                    WHERE m1.tipo = 'retirada' AND m2.id_mov IS NULL";
+        $sqlAtivos = "SELECT COUNT(*) as ativos,
+                m.id_chave,
+                m.id_usuario,
+                u.id_usuarios,
+                c.situacao,
+                m.tipo
+                FROM
+                    chaves c
+                JOIN
+                    movimentacoes m ON c.id_chave = m.id_chave
+                JOIN
+                    usuarios u ON m.id_usuario = u.id_usuarios
+                WHERE
+                    c.situacao = 'Emprestada' AND m.tipo = 'retirada'
+                AND
+                    m.data_hora = (SELECT MAX(data_hora) FROM movimentacoes WHERE id_chave = c.id_chave)";
         $ativos = $dbh->query($sqlAtivos)->fetch(PDO::FETCH_ASSOC)['ativos'];
 
         // Consulta para buscar todos os empréstimos ativos
@@ -66,7 +82,7 @@
             </div>
             <div class="headerporteirodir">
                 <div class="headerporteirodirtexto">
-                <h2><?= $nome ?></h2>
+                <h2><?=$nome?></h2>
                 <p>Porteiro</p></div>
                 <div class="headerporteirodirimg">
                     <img src="User.jpg" alt="Foto do usuário" height="60">
