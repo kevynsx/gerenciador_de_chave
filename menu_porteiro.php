@@ -60,6 +60,7 @@ error_reporting(E_ALL);
                     c.descricao,
                     m.data_hora,
                     m.solicitante,
+                    m.observacao,
                     u.nome as porteiro_nome
                 FROM
                     chaves c
@@ -130,7 +131,7 @@ error_reporting(E_ALL);
 
             <input type="text" name="solicitante" placeholder="Nome completo do solicitante" required>
             <input type="text" name="documento" placeholder="Documento (opcional)">
-            <input type="text" name="observacoes" placeholder="Observações (opcional)">
+            <input type="text" name="observacao" placeholder="Observações (opcional)">
 
             <button type="submit" class="secao2esqbotao">Emprestar Chave</button>
             </form>
@@ -159,6 +160,7 @@ error_reporting(E_ALL);
                         <p><b>Solicitante:</b> <?= htmlspecialchars($emprestimo['solicitante']) ?></p>
                         <p><b>Porteiro:</b> <?= htmlspecialchars($emprestimo['porteiro_nome']) ?></p>
                         <p><b>Descrição:</b> <?= htmlspecialchars($emprestimo['descricao']) ?></p>
+                        <p><b>Observação:</b> <?= htmlspecialchars($emprestimo['observacao']) ?></p>
                     </div>
                     
                     <form action="src/devolver_chave.php" method="POST" style="display:inline;">
