@@ -338,3 +338,96 @@ width: 50px;
     border: 1px solid var(--bordastatusdisp);
     text-align: center;
 }
+.addchave{
+    display: none;
+    flex-direction: column;
+    padding: 1%;
+    width: 45%;
+    border-radius: 10px;
+    border: 1px solid var(--bordafundo);
+    background: var(--fundo);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}
+
+.addchaveform{
+    display: flex;
+    flex-direction: column;
+}
+
+.addchaveformheader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fechar{
+    height: 40px;
+    width: 40px;
+    background-color: var(--corbotaoapagar);
+    border: 1px solid var(--bordabotao);
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+    align-self: center;
+}
+
+.fechar:hover{
+    background-color: var(--corbotaohoverapagar);
+    border: 1px solid var(--bordabotaohoverapagar);
+}
+.addchaveformtitulo{
+    text-align: center;
+    padding: 2%;
+    font-size: 16pt;
+}
+
+.addchaveforminputs{
+    display: flex;
+    flex-direction: column;
+    padding: 2.5%;
+    height: 40vh;
+    justify-content: space-between;
+    margin-bottom: 4%;
+}
+
+.addchaveformbotaoarea{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.addchaveformbotao{
+    background: var(--corbotao);
+    width: 50%;
+    padding:2%;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    border-radius: 10px;
+    border: 1px solid var(--bordabotao);
+    align-self:flex-end;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.addchaveformbotao:hover{
+    background: var(--corbotaohover);
+    border: 1px solid var(--bordabotaohover);
+}
+
+.addchaveformobj{
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+}
+
+.addchave.abrir{
+    display: flex;
+}

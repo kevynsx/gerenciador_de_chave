@@ -14,8 +14,8 @@
         //date_default_timezone_set('America/Recife');
     
     ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
         // Adicione esta linha para definir a variável $nome
         session_start();
         $nome = $_SESSION['nome'];

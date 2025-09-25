@@ -115,7 +115,8 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
         <div class="secao2esq">
             <div class="secao2esqheader">
                 <h2>Gerenciar Chaves</h2>
-                <a href="adicionar_chave.php" class="secao2esqheaderbotao"><b>+ Adicionar Chave</b></a>
+                <a class="secao2esqheaderbotao" onclick="abrirMenuAddChave()"><b>+ Adicionar Chave</b></a>
+
             </div>
             <div class="secao2esqitens">
                 <?php if(!empty($chaves)): ?>
@@ -163,12 +164,36 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                                 <p>Solicitante: <b><?= htmlspecialchars($h['solicitante'] ?? '') ?></b></p>
                                 <p>Porteiro: <b><?= htmlspecialchars($h['porteiro_nome'] ?? '') ?></b></p>
                                 <p>Descrição: <b><?= htmlspecialchars($h['descricao'] ?? '') ?></b></p>
+                                <p>Devolvida: <b><?= date('H:i:s', strtotime($h['data_devolucao'] ?? ''))?></b></p>
+
                             </div>
-                            <p class="secao2dirobjheaderdevol">
+                                
+                                <div class="addchave" id="addchavemenu">
+        <div class="addchaveform">
+            <div class="addchaveformheader">
+            <h1 class="addchaveformtitulo">Adicionar nova chave</h1>
+        <button class="fechar" id="fechar">×</button></div>
+            <form action="./src/auth_chaves.php" method="post">
+                <div class="addchaveforminputs">
+                    <div class="addchaveformobj">
+                    <label for="numerodachave">Número da chave</label>
+                <input type="text" name="codigo_chave" placeholder="ex. 001, A-01, 15, etc" id="codigo_chave" required></div>
+                <div class="addchaveformobj">
+                <label for="descricao">Descrição</label>
+                <input type="text" name="descricao" placeholder="ex. Sala 101, Laboratório de Informática, Laboratório Maker" id="descricao" required>
+                </div>
+                <div class="addchaveformobj">
+                <label for="localizacao">Localização</label>
+                <input type="text" id="localizacao" name="localizacao" placeholder="ex. 1º andar, Bloco A, Corredor 2" required></div></div>
+                <div class="addchaveformbotaoarea">
+                <input type="submit" id="addchavebotao" value="Adicionar Chave" class="addchaveformbotao"></div>
+            </form>
+        </div>
+    </div>
                                 <?php if ($h['data_devolucao']) : ?>
-                                    Devolvida
+                                    <p class="secao2dirobjheaderdevol">Devolvida</p>
                                 <?php else : ?>
-                                    Ativa
+                                    <p class="secao2dirobjheaderdevol">Ativa</p>
                                 <?php endif; ?>
                             </p>
                         </div>
@@ -179,5 +204,6 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </section>
+    <script src="./js/js.master.js"></script>
 </body>
 </html>
