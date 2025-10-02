@@ -36,7 +36,7 @@
         $sqlAtivos = "SELECT COUNT(*) as ativos,
                 m.id_chave,
                 m.id_usuario,
-                u.id_usuarios,
+                u.id_usuario,
                 c.situacao,
                 m.tipo
                 FROM
@@ -44,7 +44,7 @@
                 JOIN
                     movimentacoes m ON c.id_chave = m.id_chave
                 JOIN
-                    usuarios u ON m.id_usuario = u.id_usuarios
+                    usuarios u ON m.id_usuario = u.id_usuario
                 WHERE
                     c.situacao = 'Emprestada' AND m.tipo = 'retirada'
                 AND
@@ -67,7 +67,7 @@
                 JOIN
                     movimentacoes m ON c.id_chave = m.id_chave
                 JOIN
-                    usuarios u ON m.id_usuario = u.id_usuarios
+                    usuarios u ON m.id_usuario = u.id_usuario
                 WHERE
                     c.situacao = 'Emprestada' AND m.tipo = 'retirada'
                 AND

@@ -9,10 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $cargo = filter_input(INPUT_POST, 'funcao');
     $senha_em_texto = $_POST['senha'];
 
-    // Criando o hash da senha de forma segura
+    
     $senha_hash = password_hash($senha_em_texto, PASSWORD_DEFAULT);
 
-    // Consulta SQL corrigida para especificar as colunas
+
     $insertcargo = "INSERT INTO usuarios (nome, cpf, senha, cargo)
                     VALUES (:nome, :cpf, :senha, :cargo)";
     

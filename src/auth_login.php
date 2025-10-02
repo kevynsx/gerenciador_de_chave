@@ -5,7 +5,7 @@ session_start();
 $cpf = $_POST['cpf'];
 $senha = $_POST['senha'];
 
-$verificaUsuario = "SELECT id_usuarios, nome, senha, cargo FROM usuarios WHERE cpf = :cpf LIMIT 1";
+$verificaUsuario = "SELECT id_usuario, nome, senha, cargo FROM usuarios WHERE cpf = :cpf LIMIT 1";
 $req = $dbh->prepare($verificaUsuario);
 $req->bindValue(':cpf', $cpf);
 $req->execute();

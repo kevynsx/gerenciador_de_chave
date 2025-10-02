@@ -13,7 +13,7 @@ if (!isset($_SESSION['nome'])) {
     header("Location: login.php");
     exit;
 }
-    
+
 // Consultas para os contadores
 $sqlTotal = "SELECT COUNT(*) as total FROM chaves";
 $total = $dbh->query($sqlTotal)->fetch(PDO::FETCH_ASSOC)['total'];
@@ -27,7 +27,7 @@ $emprestadas = $dbh->query($sqlEmprestadas)->fetch(PDO::FETCH_ASSOC)['emprestada
 $sqlAtivos = "SELECT COUNT(*) as ativos,
                 m.id_chave,
                 m.id_usuario,
-                u.id_usuarios,
+                u.id_usuario,
                 c.situacao,
                 m.tipo
                 FROM
@@ -35,7 +35,7 @@ $sqlAtivos = "SELECT COUNT(*) as ativos,
                 JOIN
                     movimentacoes m ON c.id_chave = m.id_chave
                 JOIN
-                    usuarios u ON m.id_usuario = u.id_usuarios
+                    usuarios u ON m.id_usuario = u.id_usuario
                 WHERE
                     c.situacao = 'Emprestada' AND m.tipo = 'retirada'
                 AND
@@ -47,7 +47,7 @@ $sqlChaves = "SELECT id_chave, codigo_chave, descricao, situacao FROM chaves ORD
 $stmtChaves = $dbh->query($sqlChaves);
 $chaves = $stmtChaves->fetchAll(PDO::FETCH_ASSOC);
 
-// Consulta para o histÃ³rico de emprÃ©stimos
+
 $sqlHistorico = "SELECT 
                     c.codigo_chave,
                     c.descricao,
@@ -57,7 +57,7 @@ $sqlHistorico = "SELECT
                     m2.data_hora AS data_devolucao
                 FROM movimentacoes m1
                 LEFT JOIN movimentacoes m2 ON m1.id_chave = m2.id_chave AND m2.tipo = 'devolucao' AND m2.data_hora > m1.data_hora
-                LEFT JOIN usuarios u ON u.id_usuarios = m1.id_usuario
+                LEFT JOIN usuarios u ON u.id_usuario = m1.id_usuario
                 LEFT JOIN chaves c ON c.id_chave = m1.id_chave
                 WHERE m1.tipo = 'retirada'
                 ORDER BY m1.data_hora DESC";
@@ -67,6 +67,7 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,6 +75,7 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
     <title>Master - Sistema SENAC</title>
     <link rel="icon" href="css/Senac.png" type="image">
 </head>
+
 <body>
     <header>
         <div class="header">
@@ -83,8 +85,9 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div class="headerdir">
                 <div class="headerdirtexto">
-                <h2><?= htmlspecialchars($nome) ?></h2>
-                <p>Master</p></div>
+                    <h2><?= htmlspecialchars($nome) ?></h2>
+                    <p>Master</p>
+                </div>
                 <div class="headerdirimg">
                     <img src="css/User.jpg" alt="Foto do usuÃ¡rio" height="60">
                 </div>
@@ -116,11 +119,38 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
             <div class="secao2esqheader">
                 <h2>Gerenciar Chaves</h2>
                 <a class="secao2esqheaderbotao" onclick="abrirMenuAddChave()"><b>+ Adicionar Chave</b></a>
-
             </div>
+            
+                            <div class="addchave" id="addchavemenu">
+                                <div class="addchaveform">
+                                    <div class="addchaveformheader">
+                                        <h1 class="addchaveformtitulo">Adicionar nova chave</h1>
+                                        <button class="fechar" id="fechar">×</button>
+                                    </div>
+                                    <form action="./src/auth_chaves.php" method="post">
+                                        <div class="addchaveforminputs">
+                                            <div class="addchaveformobj">
+                                                <label for="codigo_chave">Número da chave</label>
+                                                <input type="text" name="codigo_chave" placeholder="ex. 001, A-01, 15, etc" id="codigo_chave" required>
+                                            </div>
+                                            <div class="addchaveformobj">
+                                                <label for="descricao">Descrição</label>
+                                                <input type="text" name="descricao" placeholder="ex. Sala 101, Laboratório de Informática, Laboratório Maker" id="descricao" required>
+                                            </div>
+                                            <div class="addchaveformobj">
+                                                <label for="localizacao">Localização</label>
+                                                <input type="text" id="localizacao" name="localizacao" placeholder="ex. 1º andar, Bloco A, Corredor 2" required>
+                                            </div>
+                                        </div>
+                                        <div class="addchaveformbotaoarea">
+                                            <input type="submit" id="addchavebotao" value="Adicionar Chave" class="addchaveformbotao">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
             <div class="secao2esqitens">
-                <?php if(!empty($chaves)): ?>
-                    <?php foreach($chaves as $ch): ?>
+                <?php if (!empty($chaves)): ?>
+                    <?php foreach ($chaves as $ch): ?>
                         <div class="secao2esqobj">
                             <div class="secao2esqitenstexto">
                                 <h2><?= htmlspecialchars($ch['codigo_chave'] ?? '') ?></h2>
@@ -151,8 +181,8 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
         <div class="secao2dir">
             <h2>Últimos Empréstimos</h2>
             <div class="secao2dirobjarea">
-                <?php if(!empty($historico)): ?>
-                    <?php foreach($historico as $h): ?>
+                <?php if (!empty($historico)): ?>
+                    <?php foreach ($historico as $h): ?>
                         <div class="secao2dirobj">
                             <div class="secao2dirobjheader">
                                 <h2><?= htmlspecialchars($h['codigo_chave'] ?? '') ?></h2>
@@ -164,37 +194,19 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                                 <p>Solicitante: <b><?= htmlspecialchars($h['solicitante'] ?? '') ?></b></p>
                                 <p>Porteiro: <b><?= htmlspecialchars($h['porteiro_nome'] ?? '') ?></b></p>
                                 <p>Descrição: <b><?= htmlspecialchars($h['descricao'] ?? '') ?></b></p>
-                                <p>Devolvida: <b><?= date('H:i:s', strtotime($h['data_devolucao'] ?? ''))?></b></p>
-
-                            </div>
-                                
-                                <div class="addchave" id="addchavemenu">
-        <div class="addchaveform">
-            <div class="addchaveformheader">
-            <h1 class="addchaveformtitulo">Adicionar nova chave</h1>
-        <button class="fechar" id="fechar">×</button></div>
-            <form action="./src/auth_chaves.php" method="post">
-                <div class="addchaveforminputs">
-                    <div class="addchaveformobj">
-                    <label for="numerodachave">Número da chave</label>
-                <input type="text" name="codigo_chave" placeholder="ex. 001, A-01, 15, etc" id="codigo_chave" required></div>
-                <div class="addchaveformobj">
-                <label for="descricao">Descrição</label>
-                <input type="text" name="descricao" placeholder="ex. Sala 101, Laboratório de Informática, Laboratório Maker" id="descricao" required>
-                </div>
-                <div class="addchaveformobj">
-                <label for="localizacao">Localização</label>
-                <input type="text" id="localizacao" name="localizacao" placeholder="ex. 1º andar, Bloco A, Corredor 2" required></div></div>
-                <div class="addchaveformbotaoarea">
-                <input type="submit" id="addchavebotao" value="Adicionar Chave" class="addchaveformbotao"></div>
-            </form>
-        </div>
-    </div>
                                 <?php if ($h['data_devolucao']) : ?>
-                                    <p class="secao2dirobjheaderdevol">Devolvida</p>
-                                <?php else : ?>
-                                    <p class="secao2dirobjheaderdevol">Ativa</p>
-                                <?php endif; ?>
+                                <p>Devolvida: <b><?= date('H:i:s', strtotime($h['data_devolucao'] ?? '')) ?></b></p>
+                            <?php else : ?>
+                                <p>Ativa: <b><?= htmlspecialchars($h['ativa'] ?? '') ?></b></p>
+                            <?php endif; ?>
+                            </p>
+                            </div>
+
+                            <?php if ($h['data_devolucao']) : ?>
+                                <p class="secao2dirobjheaderdevol">Devolvida</p>
+                            <?php else : ?>
+                                <p class="secao2dirobjheaderdevol">Ativa</p>
+                            <?php endif; ?>
                             </p>
                         </div>
                     <?php endforeach; ?>
@@ -204,6 +216,7 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </section>
-    <script src="./js/js.master.js"></script>
+    <script src="./js/master.js"></script>
 </body>
+
 </html>
