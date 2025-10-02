@@ -1,28 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
+:root{
+    --corbotao: #004A8D;
+    --corbotaohover: #208fc6;
+    --bordabotao: #000f5a;
+    --bordabotaohover: #3042b1;
+
+    --corinput: #efefef;
+    --bordainput: #7c7c7c;
+
+    --papeldeparede: ;
+
+    --fundo: white;
+    --bordafundo: var(--bordainput);
+    --fundoheader: var(--fundo);
+    --bordaheader: var(--bordainput);
+}
+
 *{
     margin: 0;
+    outline: 0px solid red;
     font-family: 'IBM Plex Sans';
 }
 
-input{
-    padding:1%;
-    border: 2px solid #b4b4b4;
+input, select{
+    padding:2%;
+    border: 1px solid var(--bordafundo);
     border-radius: 10px;
-    background: linear-gradient(180deg,rgba(168, 168, 168, 1) 0%, rgb(233, 233, 233) 23%);
+    background: var(--fundo);
     font-size: 12pt;
     font-weight: regular;
 }
 
-select{
-    padding:1%;
-    border: 2px solid #b4b4b4;
-    border-radius: 10px;
-    background: linear-gradient(180deg,rgba(168, 168, 168, 1) 0%, rgb(233, 233, 233) 23%);
-    font-size: 12pt;
-    font-weight: bold;
-    color: #000000b4;
-}
 .header{
     display: flex;
     flex-direction: row;
@@ -57,8 +66,18 @@ select{
 
 .headerdirimg{
     display: flex;
-    img{border-radius: 12px;
-    border: 2px solid #202020;}
+    align-items: center;
+    img{border-radius: 7px;
+    border: 1px solid #202020;
+background-color: var(--corinput);
+padding: 16%;
+cursor: pointer;}
+transition: all 0.1s ease-in;
+}
+
+.headerdirimg:hover{
+    img{
+    background-color: var(--fundo);}
 }
 
 .formulario{
@@ -70,9 +89,9 @@ select{
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 2%;
-    background: linear-gradient(180deg,rgba(194, 194, 194, 1) 0%, rgba(245, 245, 245, 1) 27%);
+    background: var(--corinput);
     border-radius: 10px;
-    border: 2px solid #6e6e6e;
+    border: 1px solid var(--bordainput);
     width: 45%;
     text-align: center;
     margin-top: 3%;
@@ -96,20 +115,20 @@ select{
 }
 
 .botaocadastrar{
-    background: linear-gradient(180deg, #050689, #1954d7,#2d65e2,#5184f6);
+    background: var(--corbotao);
     width: 100%;
     padding:2%;
     text-align: center;
     color: white;
     font-weight: regular;
     border-radius: 10px;
-    border: 2px solid #050689;
+    border: 1px solid var(--bordabotao);
     align-self:center;
     transition: all 0.1s ease-in-out;
+    cursor: pointer;
 }
 
 .botaocadastrar:hover{
-    background: linear-gradient(180deg, #3333c7, #3e76f0,#6190f5,#94b6ff);
-    border: 2px solid #2323c5;
-    transform: scale(1.02);
+    background: var(--corbotaohover);
+    border: 1px solid var(--bordabotaohover);
 }
