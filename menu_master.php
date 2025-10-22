@@ -79,9 +79,9 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <header>
         <div class="header">
-            <div class="headeresq">
-                <h2>Sistema SENAC</h2>
-                <p>Gerenciador de Chaves</p>
+             <div class="headeresq">
+                <img class="headeresqimg" src="imagens/senacmain.png" alt="Senac">
+                <p class="headeresqtexto">Gerenciador de Chaves</p>
             </div>
             <div class="headerdir">
                 <div class="headerdirtexto">
@@ -89,7 +89,7 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                     <p>Master</p>
                 </div>
                 <div class="headerdirimg">
-                    <img src="css/User.jpg" alt="Foto do usuÃ¡rio" height="60">
+                    <img src="imagens/engrenagem.png" alt="Foto do usuário" height="30">
                 </div>
             </div>
         </div>
@@ -105,21 +105,23 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                 <h2><?= htmlspecialchars($disponiveis) ?></h2>
             </div>
             <div class="secao1status3">
-                <p>Emprestadas</p>
-                <h2><?= htmlspecialchars($emprestadas) ?></h2>
+                <p>Emprestimos Ativos</p>
+                <h2><?= htmlspecialchars($ativos) ?></h2>
             </div>
             <div class="secao1status4">
-                <p>Empréstimos Ativos</p>
-                <h2><?= htmlspecialchars($ativos) ?></h2>
+                <p>Relatório</p>
             </div>
         </div>
     </section>
     <section class="secao2">
         <div class="secao2esq">
             <div class="secao2esqheader">
-                <h2>Gerenciar Chaves</h2>
-                <a class="secao2esqheaderbotao" onclick="abrirMenuAddChave()"><b>+ Adicionar Chave</b></a>
-            </div>
+            <h2>Gerenciar Chaves</h2>
+            <div class="secao2esqheaderareabotoes">
+        <a class="secao2esqheaderbotaochaves" onclick="abrirMenuAddChave()"><b>Adicionar Chave</b></a>
+        <a class="secao2esqheaderbotaocadastrarusuario" onclick="abrirMenuCadastroUsuario()"><b>Cadastrar Usuário</b></a>
+        <a class="secao2esqheaderbotaousuarios" onclick="abrirMenuVerUsuarios()"><b>Ver Usuários</b></a>
+        </div></div>
             
                             <div class="addchave" id="addchavemenu">
                                 <div class="addchaveform">
@@ -148,6 +150,53 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                                     </form>
                                 </div>
                             </div>
+                            <div class="tabelausuarios" id="tabelausuarios">
+        <div class="tabelausuariosarea">
+            <div class="tabelausuariostituloheader">
+            <h1 class="tabelausuariostitulo">Ver Usuários</h1>
+            <button class="fechar" id="fechar">×</button></div>
+            <div class="tabelausuarioareaitens">
+            <table>
+                <tr class="tabelausuariosheader">
+                <th><?= htmlspecialchars($nome) ?></th>
+                <th>CPF</th>
+                <th>Função</th>
+                <th>Ações</th>
+            </tr>
+            <tbody>
+                <tr class="tabelausuariosdesc">
+                    <td>Gabriel Elizabete Bachhuber-Lapierre</td>
+                    <td>666.666.666-66</td>
+                    <td>Porteiro(a)</td>
+                    <td><div class="tabelausuarioacoes">
+                <button class="tabelaeditar" type="submit" id="editar" onclick="editarUser()"><img src="../imagens/edit.png" alt="Editar Chave" height="25px"></button>
+                <button class="tabelaapagar" type="submit" id="apagar" onclick="confirmacaoApagarUser()"><img src="../imagens/lixo.png" alt="Editar Chave" height="25px" width="30px"></button>
+            </div></td>
+                </tr>
+                
+                <tr class="tabelausuariosdesc">
+                    <td>Simão Lucas Dent</td>
+                    <td>666.666.666-69</td>
+                    <td>Master</td>
+                    <td><div class="tabelausuarioacoes">
+                <button class="tabelaeditar" type="submit" id="editar" onclick="editarUser()"><img src="../imagens/edit.png" alt="Editar Chave" height="25px"></button>
+                <button class="tabelaapagar" type="submit" id="apagar" onclick="confirmacaoApagarUser()"><img src="../imagens/lixo.png" alt="Editar Chave" height="25px" width="30px"></button>
+            </div></td>
+                </tr>
+                
+                <tr class="tabelausuariosdesc">
+                    <td>Nilo Wilson</td>
+                    <td>777.777.777-77</td>
+                    <td>Professor(a)</td>
+                    <td><div class="tabelausuarioacoes">
+                <button class="tabelaeditar" type="submit" id="editar" onclick="editarUser()"><img src="../imagens/edit.png" alt="Editar Chave" height="25px"></button>
+                <button class="tabelaapagar" type="submit" id="apagar" onclick="confirmacaoApagarUser()"><img src="../imagens/lixo.png" alt="Editar Chave" height="25px" width="30px"></button>
+            </div></td>
+                </tr>
+            </tbody>
+            </table>
+        </div></div>
+    </div>
             <div class="secao2esqitens">
                 <?php if (!empty($chaves)): ?>
                     <?php foreach ($chaves as $ch): ?>
@@ -196,6 +245,7 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                                 <p>Descrição: <b><?= htmlspecialchars($h['descricao'] ?? '') ?></b></p>
                                 <?php if ($h['data_devolucao']) : ?>
                                 <p>Devolvida: <b><?= date('H:i:s', strtotime($h['data_devolucao'] ?? '')) ?></b></p>
+                                
                             <?php else : ?>
                                 <p>Ativa: <b><?= htmlspecialchars($h['ativa'] ?? '') ?></b></p>
                             <?php endif; ?>

@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manjari:wght@100;400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Sanchez:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manjari:wght@100;400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
     --corbotao: #004A8D;
-    --corbotaohover: #208fc6;
+    --corbotaohover: #35a1d6;
     --bordabotao: #000f5a;
     --bordabotaohover: #3042b1;
 
@@ -18,9 +19,9 @@
 }
 *{
     outline: 0px solid red;
-    margin: 0%;
+    margin: 0;
     text-decoration: none;
-    font-family: 'IBM Plex Sans';
+    font-family: 'Sanchez';
 }
 body{
     background: #ffffff;
@@ -31,8 +32,12 @@ input{
     border: 1px solid var(--bordainput);
     border-radius: 10px;
     background: var(--corinput);
-    font-size: 15pt;
-    font-weight: 500;
+    font-size: 12pt;
+    font-weight: regular;
+}
+
+input:focus{
+    box-shadow: var(--corbotao) 0px 0px 2px 2px;
 }
 .login{
     display: flex;
@@ -58,12 +63,10 @@ input{
 .loginheader{
     display: flex;
     flex-direction: column;
-    padding:0.5%;
     text-align: center;
-    justify-content: space-around;
-    width: 70%;
-    border: 1px solid var(--bordaheader);
-    background: var(--fundoheader);
+    width: 72.5%;
+    border: 1px solid var(--bordainput);
+    background: var(--corinput);
     border-radius: 10px;
 }
 
@@ -76,7 +79,6 @@ input{
     font-size: 11pt;
     justify-content: space-between;
     padding:1.5%;
-    
 }
 
 .logintitulotexto{
@@ -119,12 +121,12 @@ input{
     border: 1px solid var(--bordabotao);
     align-self:flex-end;
     transition: all 0.1s ease-in-out;
+    cursor: pointer;
 }
 
 .loginbotao:hover{
     background: var(--corbotaohover);
     border: 1px solid var(--bordabotaohover);
-    transform: scale(1.05);
 }
 
 .esqueceuasenhasecao{
@@ -135,6 +137,8 @@ input{
     font-size:10pt;
     color: #060e57;
     text-decoration: underline;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
 }
 
 .esqueceuasenha:hover{

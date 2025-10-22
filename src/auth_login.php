@@ -14,11 +14,10 @@ $dadosUsuario = $req->fetch(PDO::FETCH_ASSOC);
 if($dadosUsuario){
     if (password_verify($senha, $dadosUsuario["senha"])) {
         
-        $_SESSION['id_usuario'] = $dadosUsuario['id_usuarios'];
+        $_SESSION['id_usuario'] = $dadosUsuario['id_usuario'];
         $_SESSION['nome'] = $dadosUsuario['nome'];
         $_SESSION['cargo'] = $dadosUsuario['cargo'];
 
-        // CORREÇÃO: Aplicando strtolower apenas ao valor do cargo
         if(strtolower($dadosUsuario["cargo"]) === "master"){
             header('Location: ../menu_master.php');
             exit();

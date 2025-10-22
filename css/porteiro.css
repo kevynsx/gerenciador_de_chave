@@ -1,42 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manjari:wght@100;400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Sanchez:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manjari:wght@100;400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
     --corbotao: #004A8D;
-    --corbotaohover: #208fc6;
+    --corbotaohover: #35a1d6;
     --bordabotao: #000f5a;
     --bordabotaohover: #3042b1;
+    --corbotao2: var(--corstatusdisp);
+    --bordabotao2: var(--bordastatusindisp);
+    --corbotao2hover: #8dd32b;
+    --bordabotao2hover: #08661d;
+    --corbotao3: #e6a10d;
+    --bordabotao3: #d05e07;
+    --corbotao3hover: #ffe042;
+    --bordabotao3hover: #d5850d;
 
-    --corinput: white;
+    --corinput: #efefef;
     --bordainput: #7c7c7c;
 
     --papeldeparede: ;
 
-    --fundo: #efefef;
+    --fundo: white;
     --bordafundo: var(--bordainput);
     --fundoheader: var(--fundo);
     --bordaheader: var(--bordainput);
 
-    --corstatus1: #8898e1;
+    --corbotaoapagar: #cb0404;
+    --bordabotaoapagar: #5a0000;
+    --corbotaohoverapagar: #ed6238;
+    --bordabotaohoverapagar: #861111;
+
+    --corstatus1: var(--corbotaohover);
     --bordastatus1: #00188d;
-    --corstatus2: #9de188;
+    --corstatus2: var(--corbotao2hover);
     --bordastatus2: #0c8d00;
-    --corstatus3: #e1c288;
-    --bordastatus3: #8d5e00;
-    --corstatus4: #e188b9;
-    --bordastatus4: #8d0023;
+    --corstatus3: var(--corbotao3hover);
+    --bordastatus3: #be8717;
+    --corstatus4: var(--corbotaohoverapagar);
+    --bordastatus4: #69001a;
+
+    --corstatus4hover: #fb935b;
+    --bordastatus4hover: #900d0d;
 }
 
 *{
     margin: 0;
     outline: 0px solid red;
-    font-family: 'IBM Plex Sans';
+    font-family: 'Sanchez';
 }
 
 input, select{
     padding:2%;
-    border: 1px solid var(--bordainput);
+    border: 1px solid var(--bordafundo);
     border-radius: 10px;
-    background: var(--corinput);
+    background: var(--fundo);
     font-size: 12pt;
     font-weight: regular;
 }
@@ -48,12 +65,23 @@ input, select{
     padding: 1%;
 }
 
-.headerporteiroesq{
+.headeresq{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-self: center;
-    font-size: 12px;
     margin-left: 3%;
+    align-items: center;
+}
+
+.headeresqimg{
+        width: 7.5%;
+        height: auto;
+}
+
+.headeresqtexto{
+    margin-inline-start: 1%;
+    font-size: 12pt;
+    font-weight: bold;
 }
 
 .headerporteirodir{
@@ -75,8 +103,19 @@ input, select{
 
 .headerporteirodirimg{
     display: flex;
-    img{border-radius: 12px;
-    border: 1px solid #202020;}
+    align-items: center;
+    transition: all 0.1s ease-in;
+    img{border-radius: 7px;
+    border: 1px solid #202020;
+background-color: var(--corinput);
+padding: 16%;
+cursor: pointer;}
+
+}
+
+.headerporteirodirimg:hover{
+    img{
+    background-color: var(--fundo);}
 }
 
 .secao1{
@@ -93,13 +132,26 @@ input, select{
     justify-content: space-between;
 }
 
-.secao1status1, .secao1status2, .secao1status3, .secao1status4{
+.secao1status1, .secao1status2, .secao1status3{
     display: flex;
     flex-direction: column;
     padding-block: 3%;
     padding-inline: 2%;
     width: 16.75%;
     font-size: 15px;
+    border-radius: 12px;
+    border: 1px solid;
+}
+
+.secao1status4{
+    display: flex;
+    flex-direction: column;
+    padding-block: 3%;
+    padding-inline: 2%;
+    width: 16.75%;
+    justify-content: center;
+    text-align: center;
+    font-size: 40px;
     border-radius: 12px;
     border: 1px solid;
 }
@@ -124,8 +176,16 @@ input, select{
 
 .secao1status4{
     background: var(--corstatus4);
-    color: black;
+    color: #ffffff;
+    font-weight: bold;
     border-color: var(--bordastatus4);
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.secao1status4:hover{
+    background-color: var(--corstatus4hover);
+    border: 1px solid var(--bordastatus4hover);
 }
 
 .secao2{
@@ -141,8 +201,8 @@ input, select{
     flex-direction: column;
     justify-content: space-between;
     padding:1%;
-    border: 1px solid var(--bordafundo);
-    background: var(--fundo);
+    border: 1px solid var(--bordainput);
+    background: var(--corinput);
     border-radius: 10px;
     width: 45%;
 }
@@ -164,14 +224,13 @@ input, select{
     border-radius: 10px;
     border: 1px solid var(--bordabotao);
     align-self:center;
-    transition: all 0.1s ease-in-out;
     cursor: pointer;
+    transition: all 0.1s ease-in-out;
 }
 
 .secao2esqbotao:hover{
     background: var(--corbotaohover);
-    border:var(--bordabotaohover);
-    transform: scale(1.02);
+    border: 1px solid var(--bordabotaohover);
 }
 
 .secao2dir{
@@ -179,8 +238,8 @@ input, select{
     flex-direction: column;
     justify-content: space-between;
     padding:1%;
-    border: 1px solid var(--bordafundo);
-    background: var(--fundo);
+    border: 1px solid var(--bordainput);
+    background: var(--corinput);
     border-radius: 10px;
     width: 45%;
 }
@@ -197,9 +256,9 @@ input, select{
     display:flex;
     flex-direction: column;
     padding:3%;
-    border: 1px solid var(--bordainput);
+    border: 1px solid var(--bordafundo);
     border-radius: 10px;
-    background: var(--corinput);
+    background: var(--fundo);
     font-size: 9pt;
     font-weight: regular;
     margin-bottom: 1%;
@@ -214,25 +273,78 @@ input, select{
 
 .secao2dirobjheaderdevol{
     background: var(--corbotao);
-    padding:1%;
     text-align: center;
     color: white;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 7px;
     border: 1px solid var(--bordabotao);
     align-self:center;
-    width: 95%;
+    width: 100%;
     transition: all 0.1s ease-in-out;
+    padding-block: 1%;
+    cursor: pointer;
 }
 
 .secao2dirobjheaderdevol:hover{
     background: var(--corbotaohover);
-    border: var(--bordabotaohover);
-    transform: scale(1.05);
+    border: 1px solid var(--bordabotaohover);
 }
 
 .secao2dirobjtexto{
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.menuusuario{
+    display: none;
+    position: absolute;
+    top: 10%;
+    left: 84.5%;
+    padding: 1%;
+    width: 10%;
+    justify-content: space-between;
+    background-color: var(--corinput);
+    border: 1px solid var(--bordainput);
+    border-radius: 7px;
+}
+
+.botaosair{
+    text-decoration: none;
+    color: white;
+    background-color: var(--corbotaoapagar);
+    padding: 2%;
+    width: 40%;
+    text-align: center;
+    border-radius: 7px;
+    border: 1px solid var(--bordabotaoapagar);
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.botaosair:hover{
+    background: var(--corbotaohoverapagar);
+    border: 1px solid var(--bordabotaohoverapagar);
+}
+
+.botaofechar{
+    text-decoration: none;
+    color: white;
+    background-color: var(--corbotao);
+    padding: 2%;
+    width: 40%;
+    text-align: center;
+    border-radius: 7px;
+    border: 1px solid var(--bordabotao);
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.botaofechar:hover{
+    background-color: var(--corbotaohover);
+    border: 1px solid var(--bordabotaohover);
+}
+
+.menuusuario.abrir{
+    display: flex;
 }

@@ -16,14 +16,11 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-        // Adicione esta linha para definir a variável $nome
+
         session_start();
         $nome = $_SESSION['nome'];
 
-        // O restante do seu código vem aqui
-
         
-        // As suas consultas para o status (total, disponíveis, etc.)
         $sqlTotal = "SELECT COUNT(*) as total FROM chaves";
         $total = $dbh->query($sqlTotal)->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -51,9 +48,7 @@
                     m.data_hora = (SELECT MAX(data_hora) FROM movimentacoes WHERE id_chave = c.id_chave)";
         $ativos = $dbh->query($sqlAtivos)->fetch(PDO::FETCH_ASSOC)['ativos'];
 
-        // Consulta para buscar todos os empréstimos ativos
-        // Consulta para buscar todos os empréstimos ativos
-        // Consulta para buscar todos os empréstimos ativos com a movimentação mais recente de retirada
+
         $sqlEmprestimos = "SELECT
                     c.id_chave,
                     c.codigo_chave,
@@ -61,6 +56,7 @@
                     m.data_hora,
                     m.solicitante,
                     m.observacao,
+                    m.documento,
                     u.nome as porteiro_nome
                 FROM
                     chaves c
@@ -74,7 +70,7 @@
                     m.data_hora = (SELECT MAX(data_hora) FROM movimentacoes WHERE id_chave = c.id_chave)";
 
         $emprestimosAtivos = $dbh->query($sqlEmprestimos)->fetchAll(PDO::FETCH_ASSOC);
-    ?> 
+    ?>
     <header>
         <div class="headerporteiro">
             <div class="headerporteiroesq">
@@ -86,7 +82,7 @@
                 <h2><?=$nome?></h2>
                 <p>Porteiro</p></div>
                 <div class="headerporteirodirimg">
-                    <img src="User.jpg" alt="Foto do usuário" height="60">
+                    <img src="imagens/engrenagem.png" alt="Foto do usuário" height="30">
                 </div>
             </div>
         </div>
@@ -141,7 +137,6 @@
             <h2>Empréstimos Ativos</h2>
             <div class="secao2dirobjarea">
                 <?php
-                    // AQUI está o loop dinâmico que exibe os empréstimos ativos
                     if (empty($emprestimosAtivos)) {
                         echo "<p>Nenhum empréstimo ativo no momento.</p>";
                     } else {
@@ -160,7 +155,9 @@
                         <p><b>Solicitante:</b> <?= htmlspecialchars($emprestimo['solicitante']) ?></p>
                         <p><b>Porteiro:</b> <?= htmlspecialchars($emprestimo['porteiro_nome']) ?></p>
                         <p><b>Descrição:</b> <?= htmlspecialchars($emprestimo['descricao']) ?></p>
-                        <p><b>Observação:</b> <?= htmlspecialchars($emprestimo['observacao']) ?></p>
+                        <p><b>Observações:</b> <?= htmlspecialchars($emprestimo['observacao']) ?></p>
+                        <p><b>documento:</b> <?= htmlspecialchars($emprestimo['documento']) ?></p>
+                        
                     </div>
                     
                     <form action="src/devolver_chave.php" method="POST" style="display:inline;">

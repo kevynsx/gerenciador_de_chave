@@ -1,7 +1,7 @@
     <?php
         require_once('config.php');
         session_start();
-        $nome = isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Usuários';
+        $nome = $_SESSION['nome'];
     ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
             </div>
             <div class="headerdir">
                 <div class="headerdirtexto">
-                <h2>$nome</h2>
+                <h2><?=$nome?></h2>
                 <p>Master</p></div>
                 <div class="headerdirimg">
                     <img src="imagens/User.jpg" alt="Foto do usuário" height="60">
@@ -40,7 +40,7 @@
             <option value="porteiro">Porteiro</option>
         </select>
         <input type="text" maxlength="11" minlength="11" name="cpf" id="cpf" placeholder="CPF" required>
-        <input type="password" minlength="8" name="senha" id="senha" placeholder="senha" required>
+        <input type="password" minlength="8" name="senha" id="senha" placeholder="Senha" required>
     <p class="formulariotextosenha">a senha precisa ter no mínimo 8 caracteres, um número e um símbolo especial</p></div>
         <input class="botaocadastrar" type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
     </form>
