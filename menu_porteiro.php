@@ -73,9 +73,9 @@
     ?>
     <header>
         <div class="headerporteiro">
-            <div class="headerporteiroesq">
-                <h2>Sistema SENAC</h2>
-                <p>Gerenciador de Chaves</p>
+            <div class="headeresq">
+                <img class="headeresqimg" src="imagens/senacmain.png" alt="Senac">
+                <p class="headeresqtexto">Gerenciador de Chaves</p>
             </div>
             <div class="headerporteirodir">
                 <div class="headerporteirodirtexto">
@@ -102,8 +102,7 @@
                 <h2><?=$emprestadas?></h2>
             </div>
             <div class="secao1status4">
-                <p>Empréstimos Ativos</p>
-                <h2><?=$ativos?></h2>
+                <p>Relatório</p>
             </div>
         </div>
     </section>
