@@ -21,10 +21,10 @@
         $nome = $_SESSION['nome'];
 
         
-        $sqlTotal = "SELECT COUNT(*) as total FROM chaves";
+        $sqlTotal = "SELECT COUNT(*) as total FROM chaves WHERE disponivel = 1";
         $total = $dbh->query($sqlTotal)->fetch(PDO::FETCH_ASSOC)['total'];
 
-        $sqlDisponiveis = "SELECT COUNT(*) as disponiveis FROM chaves WHERE situacao = 'Disponível'";
+        $sqlDisponiveis = "SELECT COUNT(*) as disponiveis FROM chaves WHERE situacao = 'Disponível' AND disponivel = 1";
         $disponiveis = $dbh->query($sqlDisponiveis)->fetch(PDO::FETCH_ASSOC)['disponiveis'];
 
         $sqlEmprestadas = "SELECT COUNT(*) as emprestadas FROM chaves WHERE situacao = 'Emprestada'";
@@ -114,7 +114,7 @@
             <select name="id_chave" required>
                 <option disabled selected>Selecione uma chave</option>
                 <?php
-                $sqlChavesDisp = "SELECT id_chave, codigo_chave, descricao FROM chaves WHERE situacao = 'Disponível'";
+                $sqlChavesDisp = "SELECT id_chave, codigo_chave, descricao, disponivel FROM chaves WHERE situacao = 'Disponível' AND disponivel = 1";
                 $stmt = $dbh->query($sqlChavesDisp);
                 $chavesDisp = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

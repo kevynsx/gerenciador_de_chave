@@ -15,10 +15,10 @@ if (!isset($_SESSION['nome'])) {
 }
 
 // Consultas para os contadores
-$sqlTotal = "SELECT COUNT(*) as total FROM chaves";
+$sqlTotal = "SELECT COUNT(*) as total FROM chaves WHERE disponivel = 1";
 $total = $dbh->query($sqlTotal)->fetch(PDO::FETCH_ASSOC)['total'];
 
-$sqlDisponiveis = "SELECT COUNT(*) as disponiveis FROM chaves WHERE situacao = 'Disponível'";
+$sqlDisponiveis = "SELECT COUNT(*) as disponiveis FROM chaves WHERE situacao = 'Disponível' AND disponivel = 1";
 $disponiveis = $dbh->query($sqlDisponiveis)->fetch(PDO::FETCH_ASSOC)['disponiveis'];
 
 $sqlEmprestadas = "SELECT COUNT(*) as emprestadas FROM chaves WHERE situacao = 'Emprestada'";
@@ -43,7 +43,7 @@ $sqlAtivos = "SELECT COUNT(*) as ativos,
 $ativos = $dbh->query($sqlAtivos)->fetch(PDO::FETCH_ASSOC)['ativos'];
 
 // Consulta para listar as chaves para a seÃ§Ã£o "Gerenciar Chaves"
-$sqlChaves = "SELECT id_chave, codigo_chave, descricao, situacao FROM chaves ORDER BY codigo_chave ASC";
+$sqlChaves = "SELECT id_chave, codigo_chave, descricao, situacao FROM chaves WHERE disponivel = 1 ORDER BY codigo_chave ASC";
 $stmtChaves = $dbh->query($sqlChaves);
 $chaves = $stmtChaves->fetchAll(PDO::FETCH_ASSOC);
 
@@ -52,6 +52,7 @@ $sqlHistorico = "SELECT
                     c.codigo_chave,
                     c.descricao,
                     m1.solicitante,
+                    m1.observacao,
                     u.nome AS porteiro_nome,
                     m1.data_hora AS data_emprestimo,
                     m2.data_hora AS data_devolucao
@@ -213,7 +214,7 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                                         <img src="css/edit.png" alt="Editar Chave" height="35px">
                                     </button>
                                 </form>
-                                <form action="src/deletar_chave.php" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja apagar esta chave?');">
+                                <form action="src/btn_deletar.php" method="GET" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja apagar esta chave?');" >
                                     <input type="hidden" name="id_chave" value="<?= htmlspecialchars($ch['id_chave'] ?? '') ?>">
                                     <button class="secao2esqapagar" type="submit">
                                         <img src="css/lixo.png" alt="Apagar Chave" height="35px" width="30px">
@@ -243,6 +244,7 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                                 <p>Solicitante: <b><?= htmlspecialchars($h['solicitante'] ?? '') ?></b></p>
                                 <p>Porteiro: <b><?= htmlspecialchars($h['porteiro_nome'] ?? '') ?></b></p>
                                 <p>Descrição: <b><?= htmlspecialchars($h['descricao'] ?? '') ?></b></p>
+                                <p>Observações: <b><?= htmlspecialchars($h['observacao'] ?? '') ?></b></p>
                                 <?php if ($h['data_devolucao']) : ?>
                                 <p>Devolvida: <b><?= date('H:i:s', strtotime($h['data_devolucao'] ?? '')) ?></b></p>
                                 
