@@ -13,9 +13,8 @@ function abrirMenuAddChave(){
 }
 
 function abrirMenuVerUsuarios(){
-    const modal = document.getElementById("editarmenuchave");
-
-    modal.classList.add("abrir");
+    const verusuariosmodal = document.getElementById("tabelausuarios")
+    verusuariosmodal.classList.add("abrir")
 
     verusuariosmodal.addEventListener("click", (e) => {
         if(e.target.id == "fechar" || e.target.id == "tabelausuarios"){
@@ -40,7 +39,7 @@ function confirmacaoApagarChave(){
 
 function editarChave(){
     const editarchavemodal = document.getElementById("editarchavemenu")
-        editarchavemodal.classList.add("abrir")
+    editarchavemodal.classList.add("abrir")
 
     editarchavemodal.addEventListener("click", (e) => {
         if(e.target.id == "editarchavebotao" || e.target.id == "editarchavemenu"){

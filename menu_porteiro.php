@@ -20,6 +20,11 @@
         session_start();
         $nome = $_SESSION['nome'];
 
+        if(!isset($_SESSION['nome'])){
+        header("Location: login.php");
+        //verificando se existe sessão criada!
+}
+
         
         $sqlTotal = "SELECT COUNT(*) as total FROM chaves WHERE disponivel = 1";
         $total = $dbh->query($sqlTotal)->fetch(PDO::FETCH_ASSOC)['total'];

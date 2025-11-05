@@ -8,10 +8,11 @@ date_default_timezone_set('America/Recife');
 require_once('config.php');
 session_start();
 $nome = $_SESSION['nome'];
-// Verifica se o usuÃ¡rio estÃ¡ logado, se nÃ£o, redireciona para a pÃ¡gina de login.
-if (!isset($_SESSION['nome'])) {
+
+
+if(!isset($_SESSION['nome'])){
     header("Location: login.php");
-    exit;
+    //verificando se existe sessão criada!
 }
 
 // Consultas para os contadores
@@ -89,9 +90,7 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                     <h2><?= htmlspecialchars($nome) ?></h2>
                     <p>Master</p>
                 </div>
-                <div class="headerdirimg">
-                    <img src="imagens/engrenagem.png" alt="Foto do usuário" height="30">
-                </div>
+                    <p alt="Configurações" onclick="abrirMenuModalUserLogado()" class="botaoconfiguracoes">☰</p>
             </div>
         </div>
     </header>
@@ -119,9 +118,7 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
             <div class="secao2esqheader">
             <h2>Gerenciar Chaves</h2>
             <div class="secao2esqheaderareabotoes">
-        <a class="secao2esqheaderbotaochaves" onclick="abrirMenuAddChave()"><b>Adicionar Chave</b></a>
-        <a class="secao2esqheaderbotaocadastrarusuario" onclick="abrirMenuCadastroUsuario()"><b>Cadastrar Usuário</b></a>
-        <a class="secao2esqheaderbotaousuarios" onclick="abrirMenuVerUsuarios()"><b>Ver Usuários</b></a>
+            <a class="secao2esqheaderbotaochaves" onclick="abrirMenuAddChave()"><b>Adicionar Chave</b></a>
         </div></div>
             
                             <div class="addchave" id="addchavemenu">
@@ -208,7 +205,7 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                                 <p class="secao2esqsituacao"><?= htmlspecialchars($ch['situacao'] ?? '') ?></p>
                             </div>
                             <div class="secao2esqbotoes">
-                                <form action="editar_chave.php" method="GET" style="display:inline;">
+                                <form action="src/editar_chave.php" method="GET" style="display:inline;">
                                     <input type="hidden" name="id_chave" value="<?= htmlspecialchars($ch['id_chave'] ?? '') ?>">
                                     <button class="secao2esqeditar" type="submit">
                                         <img src="css/edit.png" alt="Editar Chave" height="35px">
@@ -267,6 +264,14 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
             </div>
         </div>
+
+        <div class="menuusuario" id="menuusuariologado">
+        <div class="menuusuarioparte1">
+        <div class="areasair"><img src="imagens/fechar.png" alt="Fechar" class="fechar" height="30" id="fechar"></div>
+        <a class="botaoverusuarios" onclick="abrirMenuVerUsuarios()"><b>Ver Usuários</b></a>
+        <a class="botaocadastrarusuario" onclick="abrirMenuCadastroUsuario()"><b>Cadastrar Usuário</b></a></div>
+        <a class="botaosair" href="src/sair.php"><b>Sair</b></a>
+    </div>
     </section>
     <script src="./js/master.js"></script>
 </body>
