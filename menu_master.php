@@ -207,16 +207,36 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                                 <p class="secao2esqsituacao"><?= htmlspecialchars($ch['situacao'] ?? '') ?></p>
                             </div>
                             <div class="secao2esqbotoes">
-                                <form action="src/editar_chave.php" method="GET" style="display:inline;">
                                     <input type="hidden" name="id_chave" value="<?= htmlspecialchars($ch['id_chave'] ?? '') ?>">
-                                    <button class="secao2esqeditar" type="submit">
-                                        <img src="css/edit.png" alt="Editar Chave" height="35px">
+                                    <button onclick="editarChave()  " class="secao2esqeditar" type="submit">
+                                        <img src="imagens/edit.png" alt="Editar Chave" height="35px">
                                     </button>
-                                </form>
+                                    <div class="editarchave" id="editarchavemenu"> <!-- Menu de editar chave-->
+        <div class="editarchaveform"> <!-- Formulário de editar chave-->
+            <div class="editarchaveformheader"> <!-- Cabeçalho -->
+            <h1 class="editarchaveformtitulo">Editar chave</h1> <!-- Título -->
+        <div class="areasairform"><img src="imagens/fechar.png" alt="Fechar" class="fechar" height="30" id="fechar"></div></div> <!-- Botão de fechar-->
+            <form action="./src/editar_chave.php" method="GET"> <!-- Ação do PHP -->
+                <div class="editarchaveforminputs"> <!-- Inputs -->
+                    <div class="editarchaveformobj"> <!-- Objeto input-->
+                    <label for="numerodachave">Número da chave</label>
+                <input type="text" name="numerodachave" placeholder="ex. 001, A-01, 15, etc" id="numerodachave" required></div>
+                <div class="editarchaveformobj">
+                <label for="descricao">Descrição</label>
+                <input type="text" name="descricao" placeholder="ex. Sala 101, Laboratório de Informática, Laboratório Maker" id="descricao" required>
+                </div>
+                <div class="editarchaveformobj">
+                <label for="localizacao">Localização</label>
+                <input type="text" id="localizacao" name="localizacao" placeholder="ex. 1º andar, Bloco A, Corredor 2" required></div></div>
+                <div class="editarchaveformbotaoarea">
+                <input type="submit" id="editarchavebotao" value="Editar Chave" class="editarchaveformbotao"></div>
+            </form>
+        </div>
+    </div>
                                 <form action="src/btn_deletar.php" method="GET" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja apagar esta chave?');" >
                                     <input type="hidden" name="id_chave" value="<?= htmlspecialchars($ch['id_chave'] ?? '') ?>">
                                     <button class="secao2esqapagar" type="submit">
-                                        <img src="css/lixo.png" alt="Apagar Chave" height="35px" width="30px">
+                                        <img src="imagens/lixo.png" alt="Apagar Chave" height="35px" width="30px">
                                     </button>
                                 </form>
                             </div>

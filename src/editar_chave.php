@@ -6,8 +6,10 @@ error_reporting(E_ALL);
 
 require_once('../config.php');
 
-$id_chave = $_GET['id_chave'];
-
-
+if($_SERVER['REQUEST_METHOD'] == 'GET'){
+    $codigo_chave = ['codigo_chave'];
+    $descricao = ['descricao'];
+    $localizacao = ['localizacao'];
+}
 
 ?>
