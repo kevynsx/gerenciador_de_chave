@@ -298,15 +298,18 @@ cursor: pointer;}
 
 .menuusuario{
     display: none;
-    position: absolute;
-    top: 10%;
-    left: 84.5%;
+    flex-direction: column;
+    height: 100dvh;
+    overflow: hidden;
+    width: 300px;
     padding: 1%;
-    width: 10%;
-    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    right: 0;
     background-color: var(--corinput);
+    align-items: center;
+    gap: 3%;
     border: 1px solid var(--bordainput);
-    border-radius: 7px;
 }
 
 .botaosair{
@@ -347,4 +350,26 @@ cursor: pointer;}
 
 .menuusuario.abrir{
     display: flex;
+}
+
+.fecharmenuusuario{
+    background-color: var(--corbotaoapagar);
+    border: 1px solid var(--bordabotao);
+    width: 5%;
+    height: 5vh;
+    border-radius: 7px;
+    padding-inline: 10%;
+    font-size: 20pt;
+    text-align: center;
+    color: white;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+    align-self: center;
+}
+
+.areasair{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    justify-content: center;
 }

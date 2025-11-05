@@ -86,9 +86,7 @@
                 <div class="headerporteirodirtexto">
                 <h2><?=$nome?></h2>
                 <p>Porteiro</p></div>
-                <div class="headerporteirodirimg">
-                    <img src="imagens/engrenagem.png" alt="Foto do usuário" height="30">
-                </div>
+                    <p alt="Configurações" onclick="abrirMenuModalUserLogado()" class="botaoconfiguracoes">☰</p>
             </div>
         </div>
     </header>

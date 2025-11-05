@@ -8,6 +8,8 @@ date_default_timezone_set('America/Recife');
 require_once('config.php');
 session_start();
 $nome = $_SESSION['nome'];
+$cpf = $_SESSION['cpf'];
+$cargo = $_SESSION['cargo'];
 
 
 if(!isset($_SESSION['nome'])){
@@ -117,15 +119,15 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
         <div class="secao2esq">
             <div class="secao2esqheader">
             <h2>Gerenciar Chaves</h2>
-            <div class="secao2esqheaderareabotoes">
-            <a class="secao2esqheaderbotaochaves" onclick="abrirMenuAddChave()"><b>Adicionar Chave</b></a>
-        </div></div>
             
+            <a class="secao2esqheaderbotaochaves" onclick="abrirMenuAddChave()"><b>Adicionar Chave</b></a>
+        </div>
+        
                             <div class="addchave" id="addchavemenu">
                                 <div class="addchaveform">
                                     <div class="addchaveformheader">
                                         <h1 class="addchaveformtitulo">Adicionar nova chave</h1>
-                                        <button class="fechar" id="fechar">×</button>
+                                        <div class="areasairform"><img src="imagens/fechar.png" alt="Fechar" class="fechar" height="30" id="fechar"></div>
                                     </div>
                                     <form action="./src/auth_chaves.php" method="post">
                                         <div class="addchaveforminputs">
@@ -152,19 +154,19 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
         <div class="tabelausuariosarea">
             <div class="tabelausuariostituloheader">
             <h1 class="tabelausuariostitulo">Ver Usuários</h1>
-            <button class="fechar" id="fechar">×</button></div>
+            <div class="areasairform"><img src="imagens/fechar.png" alt="Fechar" class="fechar" height="30" id="fechar"></div></div>
             <div class="tabelausuarioareaitens">
             <table>
                 <tr class="tabelausuariosheader">
-                <th><?= htmlspecialchars($nome) ?></th>
+                <th>Usuários</th>
                 <th>CPF</th>
                 <th>Função</th>
                 <th>Ações</th>
             </tr>
             <tbody>
                 <tr class="tabelausuariosdesc">
-                    <td>Gabriel Elizabete Bachhuber-Lapierre</td>
-                    <td>666.666.666-66</td>
+                    <td><?=$nome?></td>
+                    <td><?=var_dump($cpf)?></td>
                     <td>Porteiro(a)</td>
                     <td><div class="tabelausuarioacoes">
                 <button class="tabelaeditar" type="submit" id="editar" onclick="editarUser()"><img src="../imagens/edit.png" alt="Editar Chave" height="25px"></button>
@@ -271,7 +273,25 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
         <a class="botaoverusuarios" onclick="abrirMenuVerUsuarios()"><b>Ver Usuários</b></a>
         <a class="botaocadastrarusuario" onclick="abrirMenuCadastroUsuario()"><b>Cadastrar Usuário</b></a></div>
         <a class="botaosair" href="src/sair.php"><b>Sair</b></a>
+
     </div>
+    <form class="formulariocadastrouser" action="./src/auth_cadastro.php" id="cadastrousuario" method="POST">
+        <div class="formularioheader">
+            <h1 >Cadastro do Usuário</h1>
+            <div class="areasairform"><img src="imagens/fechar.png" alt="Fechar" class="fechar" height="30" id="fechar"></div>
+        </div>
+        <div class="areacadastro">
+        <input type="text" placeholder="Nome completo" id="nomecompleto" name="nomecompleto" required>
+        <select name="funcao" id="funcao" required>
+            <option disabled selected>Função</option>
+            <option value="porteiro">Porteiro</option>
+            <option value="master">Master</option>
+        </select>
+        <input type="text" maxlength="11" minlength="11" name="cpf" id="cpf" placeholder="CPF" required>
+        <input type="text" minlength="8" name="senha" id="senha" placeholder="Senha" required>
+    <p class="formulariotextosenha">a senha precisa ter no mínimo 8 caracteres, um número e um símbolo especial</p></div>
+        <input class="botaocadastrar" type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
+    </form>
     </section>
     <script src="./js/master.js"></script>
 </body>
