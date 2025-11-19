@@ -29,9 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_chave'])) {
         $stmtMov = $dbh->prepare($sqlMov);
         $stmtMov->execute([$id_chave, $tipo, $data_hora, $solicitante, $documento, $observacoes, $id_porteiro]);
 
-        
         $dbh->commit();
-
         header("Location: ../menu_porteiro.php?sucesso=1");
         exit();
 

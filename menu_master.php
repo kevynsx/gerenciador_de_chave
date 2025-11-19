@@ -8,8 +8,6 @@ date_default_timezone_set('America/Recife');
 require_once('config.php');
 session_start();
 $nome = $_SESSION['nome'];
-$cpf = $_SESSION['cpf'];
-$cargo = $_SESSION['cargo'];
 
 
 if(!isset($_SESSION['nome'])){
@@ -67,6 +65,11 @@ $sqlHistorico = "SELECT
                 ORDER BY m1.data_hora DESC";
 $stmtHistorico = $dbh->query($sqlHistorico);
 $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
+
+$sqlTableuser = "SELECT nome, cpf, cargo FROM usuarios";
+$req = $dbh->query($sqlTableuser);
+$user = $req->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -165,14 +168,16 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
             </tr>
             <tbody>
                 <tr class="tabelausuariosdesc">
-                    <td><?=$nome?></td>
-                    <td><?=var_dump($cpf)?></td>
-                    <td>Porteiro(a)</td>
+                    <?php foreach($user as $u): ?>
+                    <td><?=htmlspecialchars($u['nome'])?></td>
+                    <td><?=htmlspecialchars($u['cpf'])?></td>
+                    <td><?=htmlspecialchars($u['cargo'])?></td>
                     <td><div class="tabelausuarioacoes">
                 <button class="tabelaeditar" type="submit" id="editar" onclick="editarUser()"><img src="../imagens/edit.png" alt="Editar Chave" height="25px"></button>
                 <button class="tabelaapagar" type="submit" id="apagar" onclick="confirmacaoApagarUser()"><img src="../imagens/lixo.png" alt="Editar Chave" height="25px" width="30px"></button>
             </div></td>
                 </tr>
+                <?php endforeach?>
                 
                 <tr class="tabelausuariosdesc">
                     <td>Simão Lucas Dent</td>
@@ -208,7 +213,7 @@ $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                             <div class="secao2esqbotoes">
                                     <input type="hidden" name="id_chave" value="<?= htmlspecialchars($ch['id_chave'] ?? '') ?>">
-                                    <button onclick="editarChave()  " class="secao2esqeditar" type="submit">
+                                    <button onclick="editarChave()" class="secao2esqeditar" type="submit">
                                         <img src="imagens/edit.png" alt="Editar Chave" height="35px">
                                     </button>
                                     <div class="editarchave" id="editarchavemenu"> <!-- Menu de editar chave-->
