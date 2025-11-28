@@ -178,25 +178,7 @@ $user = $req->fetchAll(PDO::FETCH_ASSOC);
             </div></td>
                 </tr>
                 <?php endforeach?>
-                
-                <tr class="tabelausuariosdesc">
-                    <td>Simão Lucas Dent</td>
-                    <td>666.666.666-69</td>
-                    <td>Master</td>
-                    <td><div class="tabelausuarioacoes">
-                <button class="tabelaeditar" type="submit" id="editar" onclick="editarUser()"><img src="../imagens/edit.png" alt="Editar Chave" height="25px"></button>
-                <button class="tabelaapagar" type="submit" id="apagar" onclick="confirmacaoApagarUser()"><img src="../imagens/lixo.png" alt="Editar Chave" height="25px" width="30px"></button>
-            </div></td>
                 </tr>
-                
-                <tr class="tabelausuariosdesc">
-                    <td>Nilo Wilson</td>
-                    <td>777.777.777-77</td>
-                    <td>Professor(a)</td>
-                    <td><div class="tabelausuarioacoes">
-                <button class="tabelaeditar" type="submit" id="editar" onclick="editarUser()"><img src="../imagens/edit.png" alt="Editar Chave" height="25px"></button>
-                <button class="tabelaapagar" type="submit" id="apagar" onclick="confirmacaoApagarUser()"><img src="../imagens/lixo.png" alt="Editar Chave" height="25px" width="30px"></button>
-            </div></td>
                 </tr>
             </tbody>
             </table>
@@ -224,6 +206,7 @@ $user = $req->fetchAll(PDO::FETCH_ASSOC);
             <form action="./src/editar_chave.php" method="GET"> <!-- Ação do PHP -->
                 <div class="editarchaveforminputs"> <!-- Inputs -->
                     <div class="editarchaveformobj"> <!-- Objeto input-->
+                         <input type="hidden" name="id_chave" value="<?= htmlspecialchars($ch['id_chave'] ?? '') ?>">
                     <label for="numerodachave">Número da chave</label>
                 <input type="text" name="numerodachave" placeholder="ex. 001, A-01, 15, etc" id="numerodachave" required></div>
                 <div class="editarchaveformobj">
@@ -294,7 +277,7 @@ $user = $req->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="menuusuario" id="menuusuariologado">
         <div class="menuusuarioparte1">
-        <div class="areasair"><img src="imagens/fechar.png" alt="Fechar" class="fechar" height="30" id="fechar"></div>
+        <div class="areasair"><img class="fechar" src="../imagens/fechar.png" alt="Fechar" class="fechar" height="30" id="fechar"></div>
         <a class="botaoverusuarios" onclick="abrirMenuVerUsuarios()"><b>Ver Usuários</b></a>
         <a class="botaocadastrarusuario" onclick="abrirMenuCadastroUsuario()"><b>Cadastrar Usuário</b></a></div>
         <a class="botaosair" href="src/sair.php"><b>Sair</b></a>
@@ -317,6 +300,48 @@ $user = $req->fetchAll(PDO::FETCH_ASSOC);
     <p class="formulariotextosenha">a senha precisa ter no mínimo 8 caracteres, um número e um símbolo especial</p></div>
         <input class="botaocadastrar" type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
     </form>
+
+    <div class="editaruser" id="editarusermenu"> <!-- Menu de editar usuário -->
+        <div class="editaruserform"> <!-- Formulário de editar usuário -->
+            <div class="editaruserformheader"> <!-- Cabeçalho -->
+            <h1 class="editaruserformtitulo">Editar usuário</h1>
+        <div class="areasairform"><img src="imagens/fechar.png" alt="Fechar" class="fechar" height="30" id="fechar"></div></div> <!-- Fechar -->
+            <form action="./src/editar_user.php" method="POST">
+                <div class="editaruserforminputs"> <!-- Inputs -->
+                    <div class="editaruserformobj"> <!-- Objeto input -->
+
+                <input type="hidden" name="id_usuario" value="<?= htmlspecialchars($user['id_usuario'] ?? '') ?>">
+
+
+
+                <label for="nomecompleto">Nome completo</label>
+                <input type="text" name="nome_completo" id="nomecompleto" value="<?= htmlspecialchars($user['nome_completo'] ?? '') ?>">
+
+                <div class="editaruserformobj"> <!-- Objeto input -->
+                <label for="cpf">CPF</label>
+                <input type="text" name="cpf" id="cpf" maxlength="11" required value="<?= htmlspecialchars($user['cpf'] ?? '') ?>">
+
+                </div> <!-- CPF -->
+                <div class="editaruserformobj"> <!-- Objeto input -->
+                <label for="funcao">Função</label>
+                <select name="funcao" id="funcao" required>
+                    <option disabled selected>Função</option>
+                    <option value="porteiro">Porteiro</option>
+                    <option value="master">Master</option> <!-- Função -->
+                    
+                </select></div></div>
+                <div class="editaruserformbotaoarea"> <!-- Área do botão de editar usuário -->
+                <input type="submit" id="editaruserbotao" value="Editar Usuário" class="editaruserformbotao"></div> <!-- Botão de editar usuário -->
+            </form>
+        </div>
+    </div>
+    <div class="confirmacaoapagaruser" id="confirmacaoapagaruser"> <!-- Confirmação de apagar usuário -->
+        <h1 class="confirmacaoapagarusertitulo">Deseja apagar este usuário?</h1> <!--Título -->
+        <div class="confirmacaoapagaruserareabotoes"> <!-- Área dos botões -->
+            <button class="botaosim" id="sim">Sim</button> <!-- Sim -->
+            <button class="botaonao" id="nao">Não</button> <!-- Não -->
+        </div>
+    </div>
     </section>
     <script src="./js/master.js"></script>
 </body>
