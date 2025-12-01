@@ -78,6 +78,39 @@ function editarUser(){
         }
     })
 }
+// Seleciona todos os botões de editar
+const editarBtns = document.querySelectorAll('.editarUserBtn');
+const modalEditar = document.getElementById('editarusermenu');
+const fecharModal = document.getElementById('fecharEditar');
+
+editarBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        const nome = btn.dataset.nome;
+        const cpf = btn.dataset.cpf;
+        const cargo = btn.dataset.cargo;
+
+        document.getElementById('editarId').value = id;
+        document.getElementById('editarNome').value = nome;
+        document.getElementById('editarCpf').value = cpf;
+        document.getElementById('editarFuncao').value = cargo;
+
+        modalEditar.style.display = 'block';
+    });
+});
+
+// Fecha o modal ao clicar no "X"
+fecharModal.addEventListener('click', () => {
+    modalEditar.style.display = 'none';
+});
+
+// Fecha o modal clicando fora dele (opcional)
+window.addEventListener('click', (e) => {
+    if (e.target === modalEditar) {
+        modalEditar.style.display = 'none';
+    }
+});
+
 
 function abrirMenuModalUserLogado(){
     const menuuserlogado = document.getElementById("menuusuariologado")

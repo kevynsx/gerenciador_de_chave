@@ -66,9 +66,11 @@ $sqlHistorico = "SELECT
 $stmtHistorico = $dbh->query($sqlHistorico);
 $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
 
-$sqlTableuser = "SELECT nome, cpf, cargo FROM usuarios";
+$sqlTableuser = "SELECT id_usuario, nome, cpf, cargo FROM usuarios";
 $req = $dbh->query($sqlTableuser);
 $user = $req->fetchAll(PDO::FETCH_ASSOC);
+//var_dump($user);
+//exit();
 
 ?>
 
@@ -167,14 +169,28 @@ $user = $req->fetchAll(PDO::FETCH_ASSOC);
                 <th>Ações</th>
             </tr>
             <tbody>
-                <tr class="tabelausuariosdesc">
-                    <?php foreach($user as $u): ?>
-                    <td><?=htmlspecialchars($u['nome'])?></td>
-                    <td><?=htmlspecialchars($u['cpf'])?></td>
-                    <td><?=htmlspecialchars($u['cargo'])?></td>
-                    <td><div class="tabelausuarioacoes">
-                <button class="tabelaeditar" type="submit" id="editar" onclick="editarUser()"><img src="../imagens/edit.png" alt="Editar Chave" height="25px"></button>
-                <button class="tabelaapagar" type="submit" id="apagar" onclick="confirmacaoApagarUser()"><img src="../imagens/lixo.png" alt="Editar Chave" height="25px" width="30px"></button>
+<?php foreach($user as $u): ?>
+<tr>
+    <td><?= htmlspecialchars($u['nome'] ?? '') ?></td>
+    <td><?= htmlspecialchars($u['cpf'] ?? '') ?></td>
+    <td><?= htmlspecialchars($u['cargo'] ?? '') ?></td>
+    <td><div class="tabelausuarioacoes">
+        <!-- Botão Editar -->
+        <button class="editarUserBtn tabelaeditar"
+            data-id="<?= $u['id_usuario'] ?>"
+            data-nome="<?= htmlspecialchars($u['nome'] ?? '') ?>"
+            data-cpf="<?= htmlspecialchars($u['cpf'] ?? '') ?>"
+            data-cargo="<?= $u['cargo'] ?>"
+            img src="./imagens/edit.png" alt="Editar" height="25px" class="editarIcon"></button>
+        
+        </button>
+                <!--<a href="editar_user.php?id=<?= $u['id_usuario'] ?>" 
+   onclick="return editarUser(event, <?= $u['id_usuario'] ?>)" 
+   class="tabelaeditar">
+    <img src="../imagens/edit.png" alt="Editar" height="25">
+</a>-->
+
+                <button class="tabelaapagar" type="submit" id="apagar" onclick="confirmacaoApagarUser()"><img src="./imagens/lixo.png" alt="Editar" height="25px" width="30px"></button>
             </div></td>
                 </tr>
                 <?php endforeach?>
@@ -301,40 +317,41 @@ $user = $req->fetchAll(PDO::FETCH_ASSOC);
         <input class="botaocadastrar" type="submit" value="Cadastrar" id="cadastrar" name="cadastrar">
     </form>
 
-    <div class="editaruser" id="editarusermenu"> <!-- Menu de editar usuário -->
-        <div class="editaruserform"> <!-- Formulário de editar usuário -->
-            <div class="editaruserformheader"> <!-- Cabeçalho -->
+    <div class="editaruser" id="editarusermenu" style="display:none;">
+    <div class="editaruserform">
+        <div class="editaruserformheader">
             <h1 class="editaruserformtitulo">Editar usuário</h1>
-        <div class="areasairform"><img src="imagens/fechar.png" alt="Fechar" class="fechar" height="30" id="fechar"></div></div> <!-- Fechar -->
-            <form action="./src/editar_user.php" method="POST">
-                <div class="editaruserforminputs"> <!-- Inputs -->
+            <div class="areasairform">
+                <img src="imagens/fechar.png" alt="Fechar" class="fechar" id="fecharEditar" height="30">
+            </div>
+        </div>
+        <form id="editarForm" action="./src/editar_user.php" method="POST">
+            <div class="editaruserforminputs"> <!-- Inputs -->
                     <div class="editaruserformobj"> <!-- Objeto input -->
 
-                <input type="hidden" name="id_usuario" value="<?= htmlspecialchars($user['id_usuario'] ?? '') ?>">
+            <input type="hidden" name="id_usuario" id="editarId">
 
+            <label for="nome">Nome completo</label>
+            <input type="text" name="nome" id="editarNome" required>
 
-
-                <label for="nomecompleto">Nome completo</label>
-                <input type="text" name="nome_completo" id="nomecompleto" value="<?= htmlspecialchars($user['nome_completo'] ?? '') ?>">
-
-                <div class="editaruserformobj"> <!-- Objeto input -->
-                <label for="cpf">CPF</label>
-                <input type="text" name="cpf" id="cpf" maxlength="11" required value="<?= htmlspecialchars($user['cpf'] ?? '') ?>">
-
-                </div> <!-- CPF -->
-                <div class="editaruserformobj"> <!-- Objeto input -->
-                <label for="funcao">Função</label>
-                <select name="funcao" id="funcao" required>
-                    <option disabled selected>Função</option>
-                    <option value="porteiro">Porteiro</option>
-                    <option value="master">Master</option> <!-- Função -->
-                    
-                </select></div></div>
+            <div class="editaruserformobj"> <!-- Objeto input -->
+            <label for="cpf">CPF</label>
+            <input type="text" name="cpf" id="editarCpf" maxlength="11" required>
+            
+            </div>
+            <div class="editaruserformobj"> <!-- Objeto input -->
+            <label for="funcao">Função</label>
+            <select name="funcao" id="editarFuncao" required>
+                <option value="porteiro">Porteiro</option>
+                <option value="master">Master</option>
+            </select>
+            </div></div>
                 <div class="editaruserformbotaoarea"> <!-- Área do botão de editar usuário -->
-                <input type="submit" id="editaruserbotao" value="Editar Usuário" class="editaruserformbotao"></div> <!-- Botão de editar usuário -->
-            </form>
-        </div>
+                    <input type="submit" id="editaruserbotao" value="Editar Usuário" class="editaruserformbotao"></div> <!-- Botão de editar usuário -->
+        </form>
     </div>
+</div>
+
     <div class="confirmacaoapagaruser" id="confirmacaoapagaruser"> <!-- Confirmação de apagar usuário -->
         <h1 class="confirmacaoapagarusertitulo">Deseja apagar este usuário?</h1> <!--Título -->
         <div class="confirmacaoapagaruserareabotoes"> <!-- Área dos botões -->

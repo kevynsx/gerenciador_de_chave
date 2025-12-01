@@ -1,5 +1,4 @@
 <?php
-
 require '../config.php';
 
 // --- PEGAR ID DO FORM (POST) ---
@@ -8,7 +7,6 @@ if (!isset($_POST['id_usuario'])) {
 }
 
 $id = intval($_POST['id_usuario']);
-var_dump($id);
 
 // --- BUSCAR DADOS DO USUÁRIO ---
 $stmt = $dbh->prepare("SELECT * FROM usuarios WHERE id_usuario = ?");
@@ -22,18 +20,21 @@ if (!$user) {
 // --- SE O FORM FOI ENVIADO ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $nome_completo = $_POST['nome_completo'];
+    // Pegando dados do formulário
+    $nome = $_POST['nome'];      // name do input do formulário
     $cpf = $_POST['cpf'];
-    $funcao = $_POST['funcao'];
+    $cargo = $_POST['funcao'];   // name="funcao" → coluna no banco é cargo
 
-    $sql = "UPDATE usuarios SET nome_completo = ?, cpf = ?, funcao = ? WHERE id_usuario = ?";
+    // Atualizando no banco
+    $sql = "UPDATE usuarios SET nome = ?, cpf = ?, cargo = ? WHERE id_usuario = ?";
     $update = $dbh->prepare($sql);
 
-    if ($update->execute([$nome_completo, $cpf, $funcao, $id])) {
-        echo "<script>alert('Usuário atualizado com sucesso!'); window.location.href='lista_users.php';</script>";
+    if ($update->execute([$nome, $cpf, $cargo, $id])) {
+        header("Location: ../menu_master.php?sucesso=1");
         exit;
     } else {
         echo "Erro ao atualizar usuário.";
     }
 }
 ?>
+
