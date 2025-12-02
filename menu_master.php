@@ -66,7 +66,7 @@ $sqlHistorico = "SELECT
 $stmtHistorico = $dbh->query($sqlHistorico);
 $historico = $stmtHistorico->fetchAll(PDO::FETCH_ASSOC);
 
-$sqlTableuser = "SELECT id_usuario, nome, cpf, cargo FROM usuarios";
+$sqlTableuser = "SELECT id_usuario, nome, cpf, cargo FROM usuarios WHERE disponivel = 1";
 $req = $dbh->query($sqlTableuser);
 $user = $req->fetchAll(PDO::FETCH_ASSOC);
 //var_dump($user);
@@ -177,7 +177,7 @@ $user = $req->fetchAll(PDO::FETCH_ASSOC);
     <td><div class="tabelausuarioacoes">
         <!-- Botão Editar -->
         <button class="editarUserBtn tabelaeditar"
-            data-id="<?= $u['id_usuario'] ?>"
+            data-id="<?= $u['id_usuario']?>"
             data-nome="<?= htmlspecialchars($u['nome'] ?? '') ?>"
             data-cpf="<?= htmlspecialchars($u['cpf'] ?? '') ?>"
             data-cargo="<?= $u['cargo'] ?>"
@@ -190,7 +190,12 @@ $user = $req->fetchAll(PDO::FETCH_ASSOC);
     <img src="../imagens/edit.png" alt="Editar" height="25">
 </a>-->
 
-                <button class="tabelaapagar" type="submit" id="apagar" onclick="confirmacaoApagarUser()"><img src="./imagens/lixo.png" alt="Editar" height="25px" width="30px"></button>
+                <form action="src/btn_deletar_user.php" method="GET" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja apagar este usuário?');" >
+                                    <input type="hidden" name="id_usuario" value="<?= htmlspecialchars($u['id_usuario'] ?? '') ?>">
+                                    <button class="secao2esqapagar" type="submit">
+                                        <img src="imagens/lixo.png" alt="Apagar Usuario" height="35px" width="30px">
+                                    </button>
+                                </form>
             </div></td>
                 </tr>
                 <?php endforeach?>
