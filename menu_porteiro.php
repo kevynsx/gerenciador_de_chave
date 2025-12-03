@@ -76,17 +76,18 @@
 
         $emprestimosAtivos = $dbh->query($sqlEmprestimos)->fetchAll(PDO::FETCH_ASSOC);
     ?>
-    <header>
-        <div class="headerporteiro">
-            <div class="headeresq">
+    <header> <!-- Cabeçalho da página -->
+        <div class="header">
+            <div class="headeresq"> <!-- Cabeçalho esquerdo -->
                 <img class="headeresqimg" src="imagens/senacmain.png" alt="Senac">
                 <p class="headeresqtexto">Gerenciador de Chaves</p>
             </div>
-            <div class="headerporteirodir">
-                <div class="headerporteirodirtexto">
-                <h2><?=$nome?></h2>
-                <p>Porteiro</p></div>
-                    <p alt="Configurações" onclick="abrirMenuModalUserLogado()" class="botaoconfiguracoes">☰</p>
+            <div class="headerdir"> <!-- Cabeçalho direito -->
+                <div class="headerdirtexto"> <!-- Área do texto -->
+                <h2 class="headerdirtextonome"><?= htmlspecialchars($nome) ?></h2> <!-- Nome do usuário -->
+                <p>Porteiro</p>
+            </div> <!-- Função do usuário -->
+                    <p alt="Configurações" onclick="abrirMenuModalUserLogado()" class="botaoconfiguracoes">☰</p> <!-- Engrenagem -->
             </div>
         </div>
     </header>
@@ -109,12 +110,18 @@
             </div>
         </div>
     </section>
+    <div class="menuusuarioarea" id="menuusuariologado">
+    <div class="menuusuario" > <!-- Painel -->
+        <div class="areasair"><img src="./imagens/fechar.png" alt="Fechar" class="fechar" height="30" id="fechar"></div> <!-- Botão de fechar -->
+        <a class="botaosair" href="src/sair.php">Sair</a> <!-- Sair/deslogar -->
+    </div></div>
     <section class="secao2">
         <div class="secao2esq">
         <h2>Emprestar Chave</h2>
 
             <form action="src/emprestar_chave.php" method="POST" class="secao2esqitens">
-            <select name="id_chave" required>
+            <div class="secao2esqinputs">
+                <select id="selchave" required class="secao2esqinput" name='id_chave'>
                 <option disabled selected>Selecione uma chave</option>
                 <?php
                 $sqlChavesDisp = "SELECT id_chave, codigo_chave, descricao, disponivel FROM chaves WHERE situacao = 'Disponível' AND disponivel = 1";
@@ -122,14 +129,14 @@
                 $chavesDisp = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($chavesDisp as $ch) {
-                    echo "<option value='{$ch['id_chave']}'>{$ch['codigo_chave']} - {$ch['descricao']}</option>";
+                    echo "<option name='id_chave' value='{$ch['id_chave']}'>{$ch['codigo_chave']} - {$ch['descricao']}</option>";
                 }
                 ?>
             </select>
 
-            <input type="text" name="solicitante" placeholder="Nome completo do solicitante" required>
-            <input type="text" name="documento" placeholder="Documento (opcional)">
-            <input type="text" name="observacao" placeholder="Observações (opcional)">
+            <input class="secao2esqinput" type="text" name="solicitante" placeholder="Nome completo do solicitante" required>
+            <input class="secao2esqinput" type="text" name="documento" placeholder="Documento (opcional)">
+            <input class="secao2esqinput" type="text" name="observacao" placeholder="Observações (opcional)"></div>
 
             <button type="submit" class="secao2esqbotao">Emprestar Chave</button>
             </form>
@@ -174,5 +181,6 @@
             </div>
         </div>
     </section>
+    <script src="./js/master.js"></script>
 </body>
 </html>

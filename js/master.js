@@ -111,7 +111,6 @@ window.addEventListener('click', (e) => {
     }
 });
 
-
 function abrirMenuModalUserLogado(){
     const menuuserlogado = document.getElementById("menuusuariologado")
     menuuserlogado.classList.add("abrir")
@@ -120,19 +119,57 @@ function abrirMenuModalUserLogado(){
         if(e.target.id == "fechar" || e.target.id == "menuusuariologado"){
             menuuserlogado.classList.remove("abrir")
         }
+        if(e.target.id == "verusuariosbotao" || e.target.id == "menuusuariologado"){
+            menuuserlogado.classList.remove("abrir")
+        }
+        if(e.target.id == "cadastrarusuariobotao" || e.target.id == "menuusuariologado"){
+            menuuserlogado.classList.remove("abrir")
+        }
     })
 }
 
+
 function abrirMenuCadastroUsuario(){
-    const cadastrousuariomodal = document.getElementById("cadastrousuario")
+    const cadastrousuariomodal = document.getElementById("cadastrarusuariomenu")
     cadastrousuariomodal.classList.add("abrir")
 
     cadastrousuariomodal.addEventListener("click", (e) => {
-        if(e.target.id == "cadastrar" || e.target.id == "cadastrousuario"){
+        if(e.target.id == "cadastrar" || e.target.id == "cadastrarusuariomenu"){
             cadastrousuariomodal.classList.remove("abrir")
         }
-        if(e.target.id == "fechar" || e.target.id == "cadastrousuario"){
+        if(e.target.id == "fechar" || e.target.id == "cadastrarusuariomenu"){
             cadastrousuariomodal.classList.remove("abrir")
+        }
+    })
+}
+
+function abrirRelatorioPrincipal(){
+    const relatorioprincipalmodal = document.getElementById("relatorioprincipalmenu")
+    relatorioprincipalmodal.classList.add("abrir")
+
+    relatorioprincipalmodal.addEventListener("click", (e) => {
+        if(e.target.id == "relatorioprincipalbotao" || e.target.id == "relatorioprincipalmenu"){
+            relatorioprincipalmodal.classList.remove("abrir")
+        }
+        if(e.target.id == "fechar" || e.target.id == "relatorioprincipalmenu"){
+            relatorioprincipalmodal.classList.remove("abrir")
+        }
+        if(e.target.id == "relatoriohistoricobotao" || e.target.id == "relatorioprincipalmenu"){
+            relatorioprincipalmodal.classList.remove("abrir")
+        }
+    })
+}
+
+function abrirRelatorioHistorico(){
+    const relatoriohistoricomodal = document.getElementById("relatoriohistoricomenu")
+    relatoriohistoricomodal.classList.add("abrir")
+
+    relatoriohistoricomodal.addEventListener("click", (e) => {
+        if(e.target.id == "voltarhistoricoprincipal" || e.target.id == "relatoriohistoricomenu"){
+            relatoriohistoricomodal.classList.remove("abrir")
+        }
+        if(e.target.id == "fechar" || e.target.id == "relatoriohistoricomenu"){
+            relatoriohistoricomodal.classList.remove("abrir")
         }
     })
 }
